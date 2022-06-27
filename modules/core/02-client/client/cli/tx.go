@@ -274,7 +274,12 @@ func NewCmdSubmitUpdateClientProposal() *cobra.Command {
 				return err
 			}
 
-			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from)
+			isExpedited, err := cmd.Flags().GetBool(govcli.FlagIsExpedited)
+			if err != nil {
+				return err
+			}
+
+			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from, isExpedited)
 			if err != nil {
 				return err
 			}
@@ -287,9 +292,10 @@ func NewCmdSubmitUpdateClientProposal() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().String(govcli.FlagTitle, "", "title of proposal")
-	cmd.Flags().String(govcli.FlagDescription, "", "description of proposal")
-	cmd.Flags().String(govcli.FlagDeposit, "", "deposit of proposal")
+	cmd.Flags().String(govcli.FlagTitle, "", "The proposal title")
+	cmd.Flags().String(govcli.FlagDescription, "", "The proposal description")
+	cmd.Flags().Bool(govcli.FlagIsExpedited, false, "If true, makes the proposal an expedited one")
+	cmd.Flags().String(govcli.FlagDeposit, "", "The proposal deposit")
 
 	return cmd
 }
@@ -373,7 +379,12 @@ func NewCmdSubmitUpgradeProposal() *cobra.Command {
 				return err
 			}
 
-			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from)
+			isExpedited, err := cmd.Flags().GetBool(govcli.FlagIsExpedited)
+			if err != nil {
+				return err
+			}
+
+			msg, err := govtypes.NewMsgSubmitProposal(content, deposit, from, isExpedited)
 			if err != nil {
 				return err
 			}
@@ -386,9 +397,10 @@ func NewCmdSubmitUpgradeProposal() *cobra.Command {
 		},
 	}
 
-	cmd.Flags().String(govcli.FlagTitle, "", "title of proposal")
-	cmd.Flags().String(govcli.FlagDescription, "", "description of proposal")
-	cmd.Flags().String(govcli.FlagDeposit, "", "deposit of proposal")
+	cmd.Flags().String(govcli.FlagTitle, "", "The proposal title")
+	cmd.Flags().String(govcli.FlagDescription, "", "The proposal description")
+	cmd.Flags().Bool(govcli.FlagIsExpedited, false, "If true, makes the proposal an expedited one")
+	cmd.Flags().String(govcli.FlagDeposit, "", "The proposal deposit")
 
 	return cmd
 }
